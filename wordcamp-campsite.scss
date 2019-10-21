@@ -16,6 +16,7 @@ $accent-dark: #163963;
 
 $blue-dark: #245da3;
 $gray-dark: #333;
+$gray-darker: #666;
 $gray-mid: #919191;
 $gray-light: #ccc;
 $gray-lighter: #e6e9e9;
@@ -182,7 +183,7 @@ h6 {
 }
 
 .alignwide {
-	max-width: 60rem;
+	max-width: 1280rem;
 }
 
 .comments-area {
@@ -1086,7 +1087,12 @@ select {
 }
 
 .entry-meta {
-	font-size: 0.875em;
+	font-size: .88888888rem;
+	color: $gray-darker;
+	a {
+		background: none;
+		color: inherit;
+	}
 }
 
 .home .entry-meta .byline {
@@ -1125,6 +1131,10 @@ select {
 .entry-footer .edit-link a {
 	padding-bottom: 0.25em;
 	border-bottom: 1px dotted #0d5abc;
+}
+
+.site-main {
+	margin-bottom: 5rem;
 }
 
 .site-main .post-navigation .nav-previous,
