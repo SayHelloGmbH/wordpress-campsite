@@ -34,7 +34,7 @@ $label-weight: 600;
 $text-weight: 400;
 $title-weight: 600;
 
-$blockquote-border: $gray-light;
+$blockquote-border: $gray-lighter;
 $body-background: $gray-lightest;
 $body-color: $gray-dark;
 $button-background: $accent;
@@ -202,6 +202,11 @@ h6 {
 	margin-right: auto;
 	@extend .c-stack;
 
+	> hr {
+		margin-top: 3rem;
+		margin-bottom: 3rem;
+	}
+
 	a.more-link {
 		padding: 0.5rem 1rem;
 		background: $accent;
@@ -287,6 +292,7 @@ h6 {
 	padding-bottom: $unit;
 
 	blockquote {
+		font-size: 1.05em;
 		padding: $unit;
 		border-width: 2px 0;
 		background-color: $pullquote-background;
@@ -294,7 +300,6 @@ h6 {
 }
 
 .wp-block-quote {
-	font-size: 1.2em;
 	.is-large p,
 	.is-style-large p {
 		margin-top: $unit;
