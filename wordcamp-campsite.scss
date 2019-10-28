@@ -1519,15 +1519,14 @@ article.comment-body .reply {
 		display: inline-block;
 		font-size: 0.8125em;
 		margin: 0 10px;
-		text-shadow: none;
-		background-image: none;
+		@include link-underline($accent-dark, $white);
 	}
 
 	.site-info a.site-info-network:before {
 		content: '\f19a';
 		font-family: FontAwesome;
 		display: inline-block;
-		padding-right: 16px;
+		padding-right: .4em;
 	}
 }
 
