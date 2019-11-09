@@ -46,6 +46,8 @@ $code-border: $gray-light;
 $field-border: $gray-light;
 $pullquote-background: $gray-lighter;
 
+$header-logo: 'https://2020.geneve.wordcamp.org/files/2019/09/Logo-WCGVA-2020.png';
+
 $menu-background: rgba($white, .75);
 
 // Mixins
@@ -584,7 +586,6 @@ pre {
 	}
 }
 
-#content,
 #footer-widgets {
 	padding: 2.5rem $unit 0;
 	@media (min-width: 768px) {
@@ -592,6 +593,16 @@ pre {
 	}
 	@media (min-width: 992px) {
 		padding: 4rem 3rem 0;
+	}
+}
+
+#content {
+	padding: 0 $unit;
+	@media (min-width: 768px) {
+		padding: 0 2rem;
+	}
+	@media (min-width: 992px) {
+		padding: 0 3rem;
 	}
 }
 
@@ -755,8 +766,11 @@ select {
 	}
 }
 
-.site-header .custom-header {
-	clear: both;
+.site-header {
+	.custom-header, .pageheader {
+		clear: both;
+		display: none;
+	}
 }
 
 .site-header .custom-header .custom-logo,
@@ -1159,7 +1173,29 @@ select {
 
 	.entry-image {
 		@extend .alignfull;
+		overflow: hidden;
 		margin-bottom: 4rem;
+		position: relative;
+
+		img {
+			display: block;
+			width: 100%;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+		&::before {
+			display: block;
+			content: '';
+			background: rgba($body-background, .75) url("#{$header-logo}") center no-repeat;
+			background-size: 233px 300px;
+			width: 100%;
+			padding-bottom: 25%;
+			position: relative;
+			z-index: 1;
+		}
 	}
 }
 
