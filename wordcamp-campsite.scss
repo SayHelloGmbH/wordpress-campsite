@@ -13,6 +13,7 @@
 $unit: 1.5rem;
 
 $align-narrow: 640px;
+$align-medium: 800px;
 $align-wide: 1280px;
 
 $accent: #005EA7;
@@ -413,6 +414,8 @@ pre {
 		padding: 0.5rem 1rem;
 		background: $accent;
 		color: $white;
+		text-shadow: none;
+		background-image: none;
 	}
 
 	.has-small-font-size {
@@ -1195,6 +1198,17 @@ select {
 			padding-bottom: 25%;
 			position: relative;
 			z-index: 1;
+
+			.blog & {
+				background-size: auto 90%;
+			}
+		}
+
+		.blog & {
+			max-width: $align-narrow;
+			@media (min-width: 1024px){
+				max-width: $align-medium;
+			}
 		}
 	}
 }
