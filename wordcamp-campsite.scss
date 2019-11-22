@@ -420,15 +420,6 @@ pre {
 		margin-bottom: 3rem;
 	}
 
-	>[id]:before {
-		display: block;
-		content: '';
-		padding-top: 1.5rem;
-		@media screen and (min-width: 768px){
-			padding-top: 20%;
-		}
-	}
-
 	a.more-link {
 		padding: 0.5rem 1rem;
 		background: $accent;
@@ -766,20 +757,7 @@ select {
 }
 
 .site-header {
-	@media screen and (min-width: 768px){
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		z-index: 1;
-		box-shadow: 0 0 .25rem $menu-shadow;
-	}
-
-	body.admin-bar & {
-		@media screen and (min-width: 783px){
-			margin-top: 32px;
-		}
-	}
+	box-shadow: 0 0 .25rem $menu-shadow;
 
 	.custom-header, .pageheader {
 		clear: both;
