@@ -47,9 +47,11 @@ $code-border: $gray-light;
 $field-border: $gray-light;
 $pullquote-background: $gray-lighter;
 
-$header-logo: 'https://2020.geneve.wordcamp.org/files/2019/09/Logo-WCGVA-2020.png';
+$header-logo: 'https://2020.geneve.wordcamp.org/files/2019/11/Logo-WCGVA-2020-white.png';
+$header-overlay-color: rgba(0, 94, 167, 0.7);
 
-$menu-background: rgba($white, .75);
+$menu-background: rgba($white, .95);
+$menu-shadow: rgba(0, 94, 167, 0.35);
 
 // Mixins
 
@@ -136,6 +138,14 @@ $link-shadow: #f0f3f3;
 
 // Rules
 
+:focus {
+	outline: 2px auto $accent;
+}
+
+a:focus {
+	outline: 2px auto $accent;
+}
+
 body {
 	font-family: 'Lato', sans-serif;
 	background: $body-background;
@@ -152,7 +162,7 @@ body {
 }
 
 a {
-	transition: all 450ms ease;
+	transition: color 450ms ease;
 	color: $accent;
 	@include link-underline($link-shadow, $link-colour);
 }
@@ -410,6 +420,15 @@ pre {
 		margin-bottom: 3rem;
 	}
 
+	>[id]:before {
+		display: block;
+		content: '';
+		padding-top: 1.5rem;
+		@media screen and (min-width: 768px){
+			padding-top: 20%;
+		}
+	}
+
 	a.more-link {
 		padding: 0.5rem 1rem;
 		background: $accent;
@@ -447,10 +466,6 @@ pre {
 		box-shadow: inset 0 0.125rem 0 0 #f7f7fc;
 		border: 1px solid #ccc;
 		color: #36393b;
-	}
-
-	.jetpack_subscription_widget #subscribe-email input[type=email]:focus {
-		box-shadow: 0 0 0 0.12em $accent;
 	}
 
 }
@@ -729,25 +744,6 @@ textarea {
 	-webkit-appearance: none;
 }
 
-input:not([type]):focus,
-input[type=color]:focus,
-input[type=date]:focus,
-input[type=datetime-local]:focus,
-input[type=datetime]:focus,
-input[type=email]:focus,
-input[type=month]:focus,
-input[type=number]:focus,
-input[type=password]:focus,
-input[type=search]:focus,
-input[type=tel]:focus,
-input[type=text]:focus,
-input[type=time]:focus,
-input[type=url]:focus,
-input[type=week]:focus,
-textarea:focus {
-	box-shadow: 0 0 0 0.12em $accent;
-}
-
 select {
 	border: 1px solid $accent;
 	border-radius: 2px;
@@ -770,11 +766,27 @@ select {
 }
 
 .site-header {
+	@media screen and (min-width: 768px){
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 1;
+		box-shadow: 0 0 .25rem $menu-shadow;
+	}
+
+	body.admin-bar & {
+		@media screen and (min-width: 783px){
+			margin-top: 32px;
+		}
+	}
+
 	.custom-header, .pageheader {
 		clear: both;
 		display: none;
 	}
 }
+
 
 .site-header .custom-header .custom-logo,
 .site-header .custom-header .custom-logo-link {
@@ -931,7 +943,7 @@ select {
 
 .menu-toggle {
 	background-color: $white;
-	color: #36393b;
+	color: $accent;
 	display: block;
 	width: 100%;
 	height: 44px;
@@ -941,32 +953,44 @@ select {
 	text-align: center;
 	z-index: 1000;
 	transition: all 0.3s;
-}
+	
+	&:after,
+	&:before {
+		display: inline-block;
+	}
 
-.menu-toggle:before {
-	content: '\f0c9';
-	color: #36393b;
-	display: inline-block;
-	font-family: FontAwesome;
-	font-size: 1rem;
-	margin-right: 0.5em;
-}
+	&:before {
+		content: '\f0c9';
+		display: inline-block;
+		font-family: FontAwesome;
+		font-size: 1rem;
+		margin-right: 0.5em;
+	}
 
-.menu-toggle:after {
-	font-size: 1rem;
-	content: 'MENU';
-}
+	&:after {
+		font-size: 1rem;
+		content: 'MENU';
+	}
 
-.menu-toggle:after,
-.menu-toggle:before {
-	display: inline-block;
-	vertical-align: middle;
-}
+	&:active,
+	&:focus,
+	&:hover {
+		background-color: $white;
+	}
 
-.menu-toggle:active,
-.menu-toggle:focus,
-.menu-toggle:hover {
-	background-color: $white;
+	&[aria-expanded="true"] {
+		color: $white;
+		background-color: $accent;
+	}
+
+	.js & {
+		@media screen and (min-width: 37.5em) {
+			display: flex;
+			justify-content: center;
+			align-items: baseline;
+		}
+	}
+
 }
 
 .toggled-on .menu-toggle:before {
@@ -1013,14 +1037,15 @@ select {
 
 .menu-item a.focus,
 .menu-item a:active,
-.menu-item a:focus,
 .menu-item a:hover {
 	background: $white;
 	color: $accent;
 }
 
-.menu-item > a {
-	border-top: 1px dotted #36393b;
+.menu-item a.focus
+{
+	background: $accent;
+	color: $white;
 }
 
 .menu-item.call-to-action {
@@ -1187,17 +1212,22 @@ select {
 			top: 50%;
 			left: 50%;
 			transform: translate(-50%, -50%);
+			filter: grayscale(1);
 		}
 
 		&::before {
 			display: block;
 			content: '';
-			background: rgba($body-background, .75) url("#{$header-logo}") center no-repeat;
-			background-size: 233px 300px;
+			background: $header-overlay-color url("#{$header-logo}") center no-repeat;
+			background-size: auto 85%;
 			width: 100%;
 			padding-bottom: 25%;
 			position: relative;
 			z-index: 1;
+
+			@media screen and (min-width: 768px){
+				background-size: 233px auto;
+			}
 
 			.blog & {
 				background-size: auto 90%;
@@ -1222,6 +1252,13 @@ select {
 	margin-top: .5em;
 	margin-bottom: .5em;
 	font-size: 1.953em;
+
+	@media screen and (min-width: 768px){
+		&:first-child {
+			margin-top: 8rem;
+		}
+	}
+
 	.page & {
 		margin-bottom: 4rem;
 	}
@@ -1608,8 +1645,19 @@ article.comment-body .reply {
 }
 
 .site-footer {
+
 	background-color: $accent-dark;
 	clear: both;
+
+	input, button {
+		&:focus {
+			box-shadow: 0 0 9px white;
+		}
+	}
+
+	a:focus {
+		outline-color: $white;
+	}
 
 	.site-info {
 		padding: 1em 0;
@@ -1688,11 +1736,14 @@ article.comment-body .reply {
 .jetpack_subscription_widget #subscribe-email input[type=email] {
 	float: left;
 	background-color: transparent;
-	border: 1px solid $white;
+	border: 3px solid $white;
 	color: $white;
 	width: 60%;
 	height: 40px;
 	box-shadow: none;
+	&:focus {
+		box-shadow: 0 0 .5em $white;
+	}
 }
 
 .jetpack_subscription_widget #subscribe-email input[type=email]:-ms-input-placeholder {
