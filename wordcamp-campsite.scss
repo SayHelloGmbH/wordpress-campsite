@@ -507,6 +507,13 @@ pre {
 	margin-right: 0;
 }
 
+.wp-block-latest-posts {
+	padding-left: 0;
+	li > a {
+		font-size: 1.1875em;
+	}
+}
+
 .wp-block-pullquote {
 	padding-top: $unit;
 	padding-bottom: $unit;
