@@ -219,6 +219,7 @@ h6 {
 
 ul {
 	margin-left: 0;
+	padding-left: 1.2em;
 }
 
 
@@ -2088,27 +2089,8 @@ h3.org-group:after {
 	margin: 0 0 0 $unit;
 }
 
-.wcorg-organizer h2 {
-	color: #104b8c;
-	font-size: 1.25em;
-}
-
-.wcorg-organizer-description .avatar {
-	float: left;
-	margin: 0 20px 20px 0;
-}
-
-.org-team-leads--global .wordcamp-organizers__title:after,
-.org-team-leads--local .wordcamp-organizers__title:after {
-	font-size: 0.7em;
-}
-
-.org-team-leads--local .wordcamp-organizers__title:after {
-	content: '— Local lead';
-}
-
-.org-team-leads--global .wordcamp-organizers__title:after {
-	content: '— Global lead';
+.wordcamp-organizers {
+	padding-left: 0;
 }
 
 .tix-attendee-list {
