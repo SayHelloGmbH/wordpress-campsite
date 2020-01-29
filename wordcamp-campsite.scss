@@ -139,6 +139,36 @@ $link-shadow: #f0f3f3;
 	}
 }
 
+.c-stack--medium {
+	> * {
+		margin-top: $unit*2;
+		margin-bottom: $unit*2;
+
+		&:first-child {
+			margin-top: 0;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+.c-stack--large {
+	> * {
+		margin-top: $unit*3;
+		margin-bottom: $unit*3;
+
+		&:first-child {
+			margin-top: 0;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
 // Rules
 
 :focus {
@@ -550,6 +580,31 @@ pre {
 
 	tbody {
 		background-color: $white;
+	}
+}
+
+.wordcamp-block {
+	&.wordcamp-speakers {
+		padding-left: 0;
+		@extend .c-stack--large;
+
+		.wordcamp-speakers__title {
+			@extend h2;
+			a {
+				text-shadow: none;
+				text-decoration: none;
+				background: none;
+			}
+		}
+
+		.wp-block-image {
+			max-width: 150px;
+	    	float: left;
+	    	margin-right: $unit;
+			figure {
+				margin: 0;
+			}
+		}
 	}
 }
 
@@ -2101,6 +2156,10 @@ h3.org-group:after {
 
 #tix-attendees .tix-columns-3 li {
 	width: 100%;
+	display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
 @media (min-width:37.5em) {
@@ -2174,7 +2233,7 @@ h3.org-group:after {
 }
 
 #tix-attendees .tix-field {
-	display: block;
+	display: inline-block;
 	margin: 0 0.5rem 0 0;
 	font-size: 14px;
 	line-height: 1.5625em;
@@ -2197,24 +2256,13 @@ h3.org-group:after {
 }
 
 #tix-attendees .tix-attendee-url {
+	display: inline-block;
+	float: left;
+	clear: both;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	max-width: 11.25rem;
-}
-
-#tix-attendees .tix-attendee-twitter:after {
-	display: inline-block;
-	width: 0.875rem;
-	height: 0.875rem;
-	margin-left: 0.5rem;
-	vertical-align: middle;
-	opacity: 0.5;
-	content: '';
-}
-
-#tix-attendees .tix-attendee-twitter:last-child:after {
-	display: none;
 }
 
 .wcb_widget_sponsors {
@@ -2425,6 +2473,11 @@ h3.org-group:after {
 	padding-left: 0;
 }
 
+.wcb_speaker .speaker-avatar,
+.single-wcb_session .wordcamp-image__avatar-container {
+	display: none;
+}
+
 .session-date {
 	background-color: #104b8c;
 	border-radius: 15px;
@@ -2625,4 +2678,45 @@ h3.org-group:after {
 
 .tggr-timestamp {
 	font-size: 0.875rem;
+}
+
+/* 
+ * Correction for Multilingual Ticketing by Manuel Schmalstieg first used 
+ * for WordCamp Lausanne 2018, adds English to the 6 automated fields
+ * 
+ */
+#tix .tix-row-first-name .tix-left::after {
+	content: " / First Name";
+}
+
+#tix .tix-row-last-name .tix-left::after {
+	content: " / Last Name";
+}
+
+#tix .tix-row-allergy .tix-left::after {
+	content: " / Do you have a life-threatening allergy that would affect your experience at WordCamp?";
+}
+
+#tix .tix-row-accommodations .tix-left::after {
+	content: " / Do you have any accessibility needs, such as a sign language interpreter or wheelchair access, to participate in WordCamp?";
+}
+
+#tix .tix-row-privacy .tix-left::after {
+	content: " / Do you want to be listed on the public Attendees page?";
+}
+
+#tix .tix-row-coc .tix-left::after {
+	content: " / Do you agree to follow the event Code of Conduct?";
+}
+
+#tix .tix-row-allergy .tix-right label:last-child::after,
+#tix .tix-row-accommodations .tix-right label:last-child::after {
+	content: " / No";
+}
+
+#tix .tix-row-allergy .tix-right label:first-child::after,
+#tix .tix-row-accommodations .tix-right label:first-child::after,
+#tix .tix-row-coc .tix-right label:first-child::after,
+#tix .tix-row-privacy .tix-right label:first-child::after {
+	content: " / Yes";
 }
