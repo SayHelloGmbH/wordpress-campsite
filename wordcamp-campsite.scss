@@ -78,7 +78,7 @@ $link-shadow: #f0f3f3;
 
 @mixin text-underline($color-bg, $color-text) {
 	background-image: linear-gradient(rgba($color-text, .75), rgba($color-text, .75));
-	background-size: 1px 2px;
+	background-size: 1px 1px;
 	background-repeat: repeat-x;
 	background-position: 0% 95%;
 }
@@ -626,7 +626,9 @@ pre {
 	}
 }
 
-
+#session-speaker-names {
+	padding-left: 0;
+}
 
 .site {
 	overflow: hidden;
@@ -1344,6 +1346,7 @@ select {
 	margin-bottom: 2.5rem;
 	padding-bottom: 2.5rem;
 	position: relative;
+	@extend .c-stack;
 }
 
 .hentry::after {
@@ -1356,13 +1359,14 @@ select {
 	bottom: 0;
 }
 
-.entry-footer .comments-link {
-	margin-right: 1rem;
-}
-
-.entry-footer .comments-link a {
-	padding-bottom: 0.25em;
-	border-bottom: 1px dotted #0d5abc;
+.entry-footer {
+	max-width: $align-narrow;
+	margin-left: auto;
+	margin-right: auto;
+	@extend .c-stack;
+	.comments-link {
+		margin-right: 1rem;
+	}
 }
 
 .site-main .post-navigation .nav-previous a:before,
@@ -2519,20 +2523,20 @@ h3.org-group:after {
 .wcpt-schedule th {
 	text-align: center;
 	border-top: none;
-	background-color: #104b8c;
+	background-color: $accent-blue-dark;
 	color: $white;
 }
 
 .wcpt-schedule td {
-	border-bottom: 1px solid #f2f2f2;
+	border-bottom: 1px solid #eee;
 }
 
 .wcpt-schedule .global-session {
-	background-color: #6da9f5;
+	background-color: $accent-blue-dark;
 }
 
 .wcpt-schedule .global-session .wcpt-session-title {
-	color: #0b4fa4;
+	color: $white;
 	font-size: 1.125em;
 	font-weight: $title-weight;
 	letter-spacing: 1px;
@@ -2543,9 +2547,12 @@ h3.org-group:after {
 }
 
 .wcpt-schedule .wcpt-time {
-	background-color: #f8f8f8;
+	background-color: #fff;
 	color: #104b8c;
 	text-align: center;
+	@media only screen and (min-width:700.1px) {
+		width: 10%;
+	}
 }
 
 .wcpt-schedule .wcpt-time-1000am .wcpt-time,
@@ -2580,15 +2587,9 @@ h3.org-group:after {
 }
 
 .wcb-session-cell-content .wcpt-session-speakers {
-	color: #0d5abc;
 	display: block;
 	font-size: 0.875em;
 	padding-top: 10px;
-}
-
-.wcb-session-cell-content .wcpt-session-speakers a {
-	color: #0d5abc;
-	text-decoration: underline;
 }
 
 .dashicons-star-filled {
@@ -2667,6 +2668,30 @@ h3.org-group:after {
 		min-width: calc(100% + 60px);
 		max-width: 100vw;
 		width: 100%;
+	}
+}
+
+div.wcb-session-favourite-icon {
+	top: 19px !important;
+	a.fav-session-button {
+		color: $accent-blue;
+		text-shadow: none;
+		background: none;
+		opacity: .5;
+		.dashicons-star-filled {
+			color: currentColor;
+		}
+	}
+}
+
+.wcb-favourite-session {
+	background-color: rgba(0, 94, 167, .1);
+	a {
+		text-shadow: none !important;
+	}
+	div.wcb-session-favourite-icon a.fav-session-button {
+		opacity: 1;
+		color: $accent-blue;
 	}
 }
 
