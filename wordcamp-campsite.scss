@@ -536,6 +536,13 @@ pre {
 	}
 }
 
+.wp-block-embed.is-provider-meetup {
+	a {
+		text-shadow: none;
+		background-image: none;
+	}
+}
+
 .wp-block-gallery {
 	margin-left: 0;
 	margin-right: 0;
@@ -565,6 +572,17 @@ pre {
 	.is-style-large p {
 		margin-top: $unit;
 		margin-bottom: $unit;
+	}
+}
+
+.wp-block-social-links {
+	> * {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
+	a {
+		background-image: none;
 	}
 }
 
@@ -2719,4 +2737,18 @@ h3.org-group:after {
 #tix .tix-row-coc .tix-right label:first-child::after,
 #tix .tix-row-privacy .tix-right label:first-child::after {
 	content: " / Yes";
+}
+
+/* Speakers page social media icons fix */
+.page-slug-orateurs-trices li.wp-social-link a {
+	height: 36px;
+}
+.page-slug-orateurs-trices li.wp-social-link {
+	background-size: 36px 36px;
+}
+.page-slug-orateurs-trices li.wp-social-link-twitter {
+	background-image: url('https://2020.geneve.wordcamp.org/files/2020/01/Twitter_Social_Icon_Circle_Color.png');
+}
+.page-slug-orateurs-trices li.wp-social-link-wordpress {
+	background-image: url('https://2020.geneve.wordcamp.org/files/2020/01/WordPress-logotype-wmark-white1.png');
 }
