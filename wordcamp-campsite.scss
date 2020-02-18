@@ -6,6 +6,7 @@
  * Design choices by Benoît Chantre - https://benoitchantre.com/
  * CSS authorship by Mark Howells-Mead - https://sayhello.ch/
  * Additional support by András Guseo - https://andrasguseo.com/
+ * Additional support by Maxime Culea - https://maximeculea.fr
  */
 
 // Config
@@ -62,39 +63,28 @@ $link-colour: currentColor;
 $link-shadow: #f0f3f3;
 
 @mixin text-underline-crop($background) {
-	text-shadow: .03em 0 $background, 
-				-.03em 0 $background,
-				0 .03em $background,
-				0 -.03em $background,
-				.06em 0 $background,
-				-.06em 0 $background,
-				.09em 0 $background,
-				-.09em 0 $background,
-				.12em 0 $background,
-				-.12em 0 $background,
-				.15em 0 $background,
-				-.15em 0 $background;
+	text-shadow: .03em 0 $background, -.03em 0 $background, 0 .03em $background, 0 -.03em $background, .06em 0 $background, -.06em 0 $background, .09em 0 $background, -.09em 0 $background, .12em 0 $background, -.12em 0 $background, .15em 0 $background, -.15em 0 $background;
 }
 
 @mixin text-underline($color-bg, $color-text) {
 	background-image: linear-gradient(rgba($color-text, .75), rgba($color-text, .75));
 	background-size: 1px 1px;
 	background-repeat: repeat-x;
-	background-position: 0% 95%;
+	background-position: 0 95%;
 }
 
-@mixin link-underline($background, $text){
+@mixin link-underline($background, $text) {
 	@include text-underline-crop($background);
 	@include text-underline($background, $text);
 
 	color: $text;
 	text-decoration: none;
 
+	&:after,
+	&:before,
 	*,
 	*:after,
-	&:after,
-	*:before,
-	&:before {
+	*:before {
 		text-shadow: none;
 	}
 
@@ -170,7 +160,6 @@ $link-shadow: #f0f3f3;
 }
 
 // Rules
-
 :focus {
 	outline: 2px auto $accent-pink;
 }
@@ -200,9 +189,9 @@ a {
 	transition: color 450ms ease;
 	@include link-underline($link-shadow, $accent-pink);
 	color: currentColor;
-	&:visited,
 	&:active,
-	&:hover {
+	&:hover,
+	&:visited {
 		color: currentColor;
 	}
 	&:active,
@@ -244,14 +233,13 @@ h5 {
 }
 
 h6 {
-	font-size: 0.875em;
+	font-size: .875em;
 }
 
 ul {
 	margin-left: 0;
 	padding-left: 1.2em;
 }
-
 
 ::selection {
 	color: $white;
@@ -286,7 +274,7 @@ img {
 }
 
 figcaption {
-	margin-top: 0.5rem;
+	margin-top: .5rem;
 	margin-bottom: 0;
 	color: rgba(0,0,0,.6);
 }
@@ -299,12 +287,12 @@ table {
 }
 
 caption {
-	margin-bottom: 0.5rem;
+	margin-bottom: .5rem;
 }
 
 td,
 th {
-	padding: 0.5rem 1rem;
+	padding: .5rem 1rem;
 	border-top: 1px solid rgba(0,0,0,.1);
 	font-size: 16px;
 	font-size: 1rem;
@@ -335,7 +323,7 @@ sub {
 }
 
 li {
-	margin-top: 0.25rem;
+	margin-top: .25rem;
 
 	&:first-child {
 		margin-top: 0;
@@ -352,15 +340,15 @@ blockquote {
 }
 
 cite {
-	opacity: 0.7;
+	opacity: .7;
 }
 
 code,
 pre {
 	border: 1px solid $code-border;
-	border-radius: 0.1875rem;
+	border-radius: .1875rem;
 	font-size: 14px;
-	font-size: 0.875rem;
+	font-size: .875rem;
 	line-height: 1.5;
 	color: rgba(0,0,0,.75);
 	font-family: Consolas, Courier, monospace;
@@ -378,7 +366,7 @@ pre {
 }
 
 code {
-	padding: 0.125rem 0.1875rem;
+	padding: .125rem .1875rem;
 	background-color: $code-background;
 	color: $code-color;
 }
@@ -400,8 +388,8 @@ pre {
 /***** Gutenberg *****/
 
 .alignfull,
-.alignwide,
-.alignnarrow {
+.alignnarrow,
+.alignwide {
 	position: relative;
 	left: 50%;
 	transform: translateX(-50%);
@@ -455,7 +443,7 @@ pre {
 	}
 
 	a.more-link {
-		padding: 0.5rem 1rem;
+		padding: .5rem 1rem;
 		background: $accent-pink;
 		color: $white;
 		text-shadow: none;
@@ -463,7 +451,7 @@ pre {
 	}
 
 	.has-small-font-size {
-		font-size: 0.8125em;
+		font-size: .8125em;
 		line-height: 1.5;
 	}
 
@@ -488,7 +476,7 @@ pre {
 
 	.jetpack_subscription_widget #subscribe-email input[type=email] {
 		background-color: $white;
-		box-shadow: inset 0 0.125rem 0 0 #f7f7fc;
+		box-shadow: inset 0 .125rem 0 0 #f7f7fc;
 		border: 1px solid #ccc;
 		color: #36393b;
 	}
@@ -498,7 +486,7 @@ pre {
 .post {
 	@extend .c-stack;
 	.entry-content {
-		@media screen and (min-width:768px){
+		@media screen and (min-width:768px) {
 			margin-top: 4rem;
 		}
 	}
@@ -509,16 +497,22 @@ pre {
 
 	&__link {
 		font-size: 1.3em;
-		padding: 0.5em 1em;
+		padding: .5em 1em;
 		border-radius: 0;
 		background-color: $accent-pink;
 		color: $white;
 		border-bottom: 0 !important;
-				background-image: none;
-				text-shadow: none;
+		background-image: none;
+		text-shadow: none;
 
 		@media (min-width: 768px) {
 			font-size: 1.25em;
+		}
+
+		&:active,
+		&:hover {
+			text-shadow: none;
+			background-image: none;
 		}
 	}
 
@@ -592,7 +586,7 @@ pre {
 	th {
 		background-color: $accent-pink;
 		color: $white;
-		font-size: 0.9375rem;
+		font-size: .9375rem;
 		font-weight: $text-weight;
 	}
 
@@ -617,8 +611,8 @@ pre {
 
 		.wp-block-image {
 			max-width: 150px;
-	    	float: left;
-	    	margin-right: $unit;
+			float: left;
+			margin-right: $unit;
 			figure {
 				margin: 0;
 			}
@@ -635,7 +629,6 @@ pre {
 	position: relative;
 }
 
-
 .site-main {
 	margin-bottom: 5rem;
 
@@ -649,12 +642,12 @@ pre {
 			padding-right: $unit;
 			font-size: .875rem;
 
-			@media screen and (min-width:768px){
+			@media screen and (min-width:768px) {
 				padding-left: 0;
 				padding-right: 0;
 			}
-			
-			@media screen and (min-width: 768px){
+
+			@media screen and (min-width: 768px) {
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
@@ -667,7 +660,7 @@ pre {
 				float: none;
 				width: 100%;
 
-				@media screen and (min-width: 768px){
+				@media screen and (min-width: 768px) {
 					margin-top: 0;
 					margin-bottom: 0;
 				}
@@ -788,7 +781,7 @@ input[type=submit] {
 	padding: 1rem 2rem;
 	text-transform: uppercase;
 	text-shadow: none;
-	transition: background-color 0.3s;
+	transition: background-color .3s;
 }
 
 input:not([type]),
@@ -809,7 +802,7 @@ input[type=week],
 textarea {
 	display: block;
 	width: 100%;
-	padding: 0.25rem 0.5rem;
+	padding: .25rem .5rem;
 	margin: 0;
 	border: 1px solid #ccc;
 	border-radius: 0;
@@ -817,7 +810,7 @@ textarea {
 	background-color: $white;
 	font-size: 1em;
 	font-weight: $text-weight;
-	box-shadow: inset 0 0.125rem 0 0 #f7f7fc;
+	box-shadow: inset 0 .125rem 0 0 #f7f7fc;
 	-webkit-appearance: none;
 }
 
@@ -845,12 +838,12 @@ select {
 .site-header {
 	box-shadow: 0 0 .25rem $menu-shadow;
 
-	.custom-header, .pageheader {
+	.custom-header,
+	.pageheader {
 		clear: both;
 		display: none;
 	}
 }
-
 
 .site-header .custom-header .custom-logo,
 .site-header .custom-header .custom-logo-link {
@@ -885,21 +878,21 @@ select {
 	height: 120px;
 	width: 120px;
 	background-size: contain;
-	margin: 0 auto 0.5em;
+	margin: 0 auto .5em;
 }
 
 .site-header .site-title {
 	font-weight: $title-weight;
-	margin-bottom: 0.5rem;
+	margin-bottom: .5rem;
 	line-height: 1.25em;
 }
 
 .site-header .custom-header .site-description {
 	display: none;
 	color: #0d5abc;
-	font-size: 0.8em;
+	font-size: .8em;
 	line-height: 1.3;
-	padding-top: 0.5em;
+	padding-top: .5em;
 	margin: 0;
 }
 
@@ -1016,8 +1009,8 @@ select {
 	border-radius: 0;
 	text-align: center;
 	z-index: 1000;
-	transition: all 0.3s;
-	
+	transition: all .3s;
+
 	&:after,
 	&:before {
 		display: inline-block;
@@ -1028,7 +1021,7 @@ select {
 		display: inline-block;
 		font-family: FontAwesome;
 		font-size: 1rem;
-		margin-right: 0.5em;
+		margin-right: .5em;
 	}
 
 	&:after {
@@ -1094,7 +1087,7 @@ select {
 
 .menu-item a {
 	color: #36393b;
-	padding: 0.75rem 2rem;
+	padding: .75rem 2rem;
 	background: none;
 	text-shadow: none;
 }
@@ -1106,8 +1099,7 @@ select {
 	color: $accent-pink;
 }
 
-.menu-item a.focus
-{
+.menu-item a.focus {
 	background: $accent-pink;
 	color: $white;
 }
@@ -1151,8 +1143,8 @@ select {
 }
 
 .sub-menu a {
-	font-size: 0.75em;
-	padding: 0.25rem 2rem 0.25rem 3.25rem;
+	font-size: .75em;
+	padding: .25rem 2rem .25rem 3.25rem;
 	border: none;
 }
 
@@ -1211,7 +1203,7 @@ select {
 
 	.menu-item a {
 		font-size: 1.125rem;
-		padding: 0.75rem 1rem;
+		padding: .75rem 1rem;
 	}
 
 	.menu-item.call-to-action {
@@ -1221,7 +1213,7 @@ select {
 
 	.menu-item-has-children a:after {
 		content: '\f107';
-		margin-left: 0.5em;
+		margin-left: .5em;
 		color: $accent-pink;
 		display: inline-block;
 		font-family: FontAwesome;
@@ -1240,7 +1232,7 @@ select {
 
 	.menu-item-has-children:hover > .sub-menu li a {
 		font-size: 1rem;
-		padding: 0.5rem 1rem 0.5rem 2.5rem;
+		padding: .5rem 1rem .5rem 2.5rem;
 	}
 
 	.menu-item-has-children:hover > .sub-menu li a:before {
@@ -1291,7 +1283,7 @@ select {
 
 		.blog & {
 			max-width: $align-narrow;
-			@media (min-width: 1024px){
+			@media (min-width: 1024px) {
 				max-width: $align-medium;
 			}
 		}
@@ -1309,7 +1301,7 @@ select {
 	margin-bottom: .5em;
 	font-size: 1.953em;
 
-	@media screen and (min-width: 768px){
+	@media screen and (min-width: 768px) {
 		&:first-child {
 			margin-top: 8rem;
 		}
@@ -1369,10 +1361,10 @@ select {
 	}
 }
 
-.site-main .post-navigation .nav-previous a:before,
-.site-main .posts-navigation .nav-previous a:before,
 .site-main .post-navigation .nav-next a:after,
-.site-main .posts-navigation .nav-next a:after {
+.site-main .post-navigation .nav-previous a:before,
+.site-main .posts-navigation .nav-next a:after,
+.site-main .posts-navigation .nav-previous a:before {
 	color: $accent-pink;
 	font-family: FontAwesome;
 	font-size: 1rem;
@@ -1382,14 +1374,14 @@ select {
 .site-main .posts-navigation .nav-previous a:before {
 	display: inline-block;
 	content: '\f104';
-	margin-right: 0.5em;
+	margin-right: .5em;
 }
 
 .site-main .post-navigation .nav-next a:after,
 .site-main .posts-navigation .nav-next a:after {
 	display: inline-block;
 	content: '\f105';
-	margin-left: 0.5em;
+	margin-left: .5em;
 }
 
 .comments-area {
@@ -1414,7 +1406,7 @@ ol.comment-list > .comment {
 }
 
 ol.comment-list .pingback {
-	font-size: 0.9375rem;
+	font-size: .9375rem;
 	line-height: 1.5;
 }
 
@@ -1432,7 +1424,7 @@ article.comment-body {
 
 article.comment-body .comment-author {
 	display: block;
-	font-size: 0.8em;
+	font-size: .8em;
 	line-height: 1.5;
 }
 
@@ -1456,7 +1448,7 @@ article.comment-body .comment-author .says {
 }
 
 article.comment-body .comment-metadata {
-	font-size: 0.64em;
+	font-size: .64em;
 	line-height: 1.4;
 	margin-left: 3.25rem;
 }
@@ -1466,7 +1458,7 @@ article.comment-body .comment-metadata a {
 }
 
 article.comment-body .comment-content {
-	margin-top: 0.5rem;
+	margin-top: .5rem;
 	padding: $unit;
 	background: #fafafa;
 }
@@ -1476,8 +1468,8 @@ article.comment-body .comment-content p:last-child {
 }
 
 article.comment-body .reply {
-	margin-top: 0.5rem;
-	font-size: 0.8em;
+	margin-top: .5rem;
+	font-size: .8em;
 }
 
 .comment-respond {
@@ -1490,7 +1482,7 @@ article.comment-body .reply {
 }
 
 .comment-respond .comment-notes {
-	font-size: 0.875rem;
+	font-size: .875rem;
 	line-height: 1.4;
 	color: #0d5abc;
 }
@@ -1500,7 +1492,7 @@ article.comment-body .reply {
 }
 
 .comment-respond .comment-form label {
-	font-size: 0.875rem;
+	font-size: .875rem;
 	color: #36393b;
 	text-transform: uppercase;
 	font-weight: $label-weight;
@@ -1520,11 +1512,11 @@ article.comment-body .reply {
 }
 
 .comment-respond .comment-form .form-submit {
-	padding-top: 0.5rem;
+	padding-top: .5rem;
 }
 
 .sharedaddy .sd-title {
-	font-size: 0.9em;
+	font-size: .9em;
 }
 
 .tshirt-table {
@@ -1707,7 +1699,8 @@ article.comment-body .reply {
 	background-color: $accent-blue-dark;
 	clear: both;
 
-	input, button {
+	button,
+	input {
 		&:focus {
 			box-shadow: 0 0 9px white;
 		}
@@ -1725,7 +1718,7 @@ article.comment-body .reply {
 	.site-info a {
 		color: $white;
 		display: inline-block;
-		font-size: 0.8125em;
+		font-size: .8125em;
 		margin: 0 10px;
 		@include link-underline($accent-blue-dark, $white);
 	}
@@ -1783,7 +1776,7 @@ article.comment-body .reply {
 }
 
 .jetpack_subscription_widget #subscribe-text p {
-	font-size: 0.9375em;
+	font-size: .9375em;
 	line-height: 1.4;
 }
 
@@ -1852,7 +1845,7 @@ article.comment-body .reply {
 }
 
 .milestone-widget .milestone-header span.date {
-	font-size: 0.8125em;
+	font-size: .8125em;
 	color: $white;
 }
 
@@ -1898,7 +1891,7 @@ article.comment-body .reply {
 .tix_tickets_table th {
 	background-color: $accent-pink;
 	color: $white;
-	font-size: 0.9375rem;
+	font-size: .9375rem;
 }
 
 .tix_tickets_table th {
@@ -1914,7 +1907,7 @@ article.comment-body .reply {
 .tix-ticket-title {
 	display: inline-block;
 	font-size: 1.25em;
-	margin-bottom: 0.75rem;
+	margin-bottom: .75rem;
 }
 
 .tix-ticket-excerpt {
@@ -2040,8 +2033,8 @@ article.comment-body .reply {
 
 	td.tix-column-price {
 		font-size: 1.25em;
-		padding-top: 0.5rem;
-		padding-bottom: 0.5rem;
+		padding-top: .5rem;
+		padding-bottom: .5rem;
 		color: $accent-pink;
 	}
 
@@ -2076,12 +2069,12 @@ article.comment-body .reply {
 	}
 
 	.tix-order-summary td.tix-column-per-ticket {
-		padding-bottom: 0.5rem;
+		padding-bottom: .5rem;
 	}
 
 	.tix-order-summary td.tix-column-quantity {
-		padding-top: 0.5rem;
-		padding-bottom: 0.5rem;
+		padding-top: .5rem;
+		padding-bottom: .5rem;
 	}
 
 	.tix-order-summary td.tix-column-quantity::before {
@@ -2179,9 +2172,9 @@ h3.org-group:after {
 #tix-attendees .tix-columns-3 li {
 	width: 100%;
 	display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
 }
 
 @media (min-width:37.5em) {
@@ -2225,8 +2218,8 @@ h3.org-group:after {
 	height: auto;
 	min-height: 3rem;
 	padding-left: 4rem;
-	padding-right: 0.5rem;
-	font-size: 0.8em;
+	padding-right: .5rem;
+	font-size: .8em;
 	line-height: 1.25em;
 	text-align: left;
 }
@@ -2240,7 +2233,7 @@ h3.org-group:after {
 	width: 3rem;
 	height: 3rem;
 	background-color: $white;
-	transition: all 0.15s ease;
+	transition: all .15s ease;
 }
 
 #tix-attendees a {
@@ -2256,7 +2249,7 @@ h3.org-group:after {
 
 #tix-attendees .tix-field {
 	display: inline-block;
-	margin: 0 0.5rem 0 0;
+	margin: 0 .5rem 0 0;
 	font-size: 14px;
 	line-height: 1.5625em;
 	vertical-align: middle;
@@ -2266,7 +2259,7 @@ h3.org-group:after {
 	display: block;
 	padding-right: 0;
 	margin-right: 0;
-	margin-bottom: 0.125rem;
+	margin-bottom: .125rem;
 	color: #104b8c;
 	font-size: 18px;
 	line-height: 1.25em;
@@ -2495,8 +2488,8 @@ h3.org-group:after {
 	padding-left: 0;
 }
 
-.wcb_speaker .speaker-avatar,
-.single-wcb_session .wordcamp-image__avatar-container {
+.single-wcb_session .wordcamp-image__avatar-container,
+.wcb_speaker .speaker-avatar {
 	display: none;
 }
 
@@ -2588,7 +2581,7 @@ h3.org-group:after {
 
 .wcb-session-cell-content .wcpt-session-speakers {
 	display: block;
-	font-size: 0.875em;
+	font-size: .875em;
 	padding-top: 10px;
 }
 
@@ -2716,52 +2709,52 @@ div.wcb-session-favourite-icon {
 }
 
 .tggr-author-profile .tggr-author-username {
-	font-size: 0.9375em;
+	font-size: .9375em;
 }
 
 .tggr-timestamp {
-	font-size: 0.875rem;
+	font-size: .875rem;
 }
 
-/* 
- * Correction for Multilingual Ticketing by Manuel Schmalstieg first used 
+/*
+ * Correction for Multilingual Ticketing by Manuel Schmalstieg first used
  * for WordCamp Lausanne 2018, adds English to the 6 automated fields
- * 
+ *
  */
 #tix .tix-row-first-name .tix-left::after {
-	content: " / First Name";
+	content: ' / First Name';
 }
 
 #tix .tix-row-last-name .tix-left::after {
-	content: " / Last Name";
+	content: ' / Last Name';
 }
 
 #tix .tix-row-allergy .tix-left::after {
-	content: " / Do you have a life-threatening allergy that would affect your experience at WordCamp?";
+	content: ' / Do you have a life-threatening allergy that would affect your experience at WordCamp?';
 }
 
 #tix .tix-row-accommodations .tix-left::after {
-	content: " / Do you have any accessibility needs, such as a sign language interpreter or wheelchair access, to participate in WordCamp?";
+	content: ' / Do you have any accessibility needs, such as a sign language interpreter or wheelchair access, to participate in WordCamp?';
 }
 
 #tix .tix-row-privacy .tix-left::after {
-	content: " / Do you want to be listed on the public Attendees page?";
+	content: ' / Do you want to be listed on the public Attendees page?';
 }
 
 #tix .tix-row-coc .tix-left::after {
-	content: " / Do you agree to follow the event Code of Conduct?";
+	content: ' / Do you agree to follow the event Code of Conduct?';
 }
 
-#tix .tix-row-allergy .tix-right label:last-child::after,
-#tix .tix-row-accommodations .tix-right label:last-child::after {
-	content: " / No";
+#tix .tix-row-accommodations .tix-right label:last-child::after,
+#tix .tix-row-allergy .tix-right label:last-child::after {
+	content: ' / No';
 }
 
-#tix .tix-row-allergy .tix-right label:first-child::after,
 #tix .tix-row-accommodations .tix-right label:first-child::after,
+#tix .tix-row-allergy .tix-right label:first-child::after,
 #tix .tix-row-coc .tix-right label:first-child::after,
 #tix .tix-row-privacy .tix-right label:first-child::after {
-	content: " / Yes";
+	content: ' / Yes';
 }
 
 /* Speakers page social media icons fix */
