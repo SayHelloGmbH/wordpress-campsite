@@ -415,6 +415,11 @@ pre {
 	@extend .c-stack;
 }
 
+.has-drop-cap::first-letter {
+	color: $accent-pink;
+	font-weight: 700;
+}
+
 .entry-summary {
 	margin: 0;
 }
